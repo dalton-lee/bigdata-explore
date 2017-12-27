@@ -2,6 +2,7 @@
 
 # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 timedatectl set-timezone Asia/Shanghai
+systemctl restart network
 
 curl http://ThinkPad-P50/ambari/centos7/2.x/updates/2.6.0.0/ambari.repo -o /etc/yum.repos.d/ambari.repo
 yum -y install glibc-common ntpdate

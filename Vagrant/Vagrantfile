@@ -49,6 +49,6 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.provision "shell", path: "https://github.com/dalton-lee/bigdata-explore/blob/master/Vagrant/provisioner.sh"
+  config.vm.provision "shell", path: "https://raw.githubusercontent.com/dalton-lee/bigdata-explore/master/Vagrant/provisioner.sh"
 
 end
