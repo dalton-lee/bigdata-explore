@@ -13,10 +13,13 @@ build-locale-archive
 localectl set-locale LANG=zh_CN.utf8
 
 # echo "25/* * * * * /usr/sbin/ntpdate 2.cn.pool.ntp.org" > /var/spool/cron/vagrant
-echo "25/* * * * * /usr/sbin/ntpdate 120.25.115.19" > /var/spool/cron/vagrant
+echo "25/* * * * * root /usr/sbin/ntpdate 120.25.115.19" >> /etc/crontab
 
 echo "export JAVA_HOME=/vagrant/jdk1.7.0_80" >> /etc/profile
 echo "export CLASSPATH=.:\$JAVA_HOME/lib/dt.jar:\$JAVA_HOME/lib/tools.jar" >> /etc/profile
 echo "export PATH=\$PATH:\$JAVA_HOME/bin" >> /etc/profile
+
+chmod u+x /vagrant/jdk1.7.0_80/bin/*
+chmod u+x /vagrant/jdk1.7.0_80/jre/bin/*
 
 source /etc/profile
