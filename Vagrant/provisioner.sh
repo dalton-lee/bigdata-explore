@@ -4,6 +4,8 @@
 timedatectl set-timezone Asia/Shanghai
 systemctl restart network
 
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl http://ThinkPad-P50/centos/CentOS7-Base-163-mod.repo -o /etc/yum.repos.d/CentOS7-Base-163-mod.repo
 curl http://ThinkPad-P50/ambari/centos7/2.x/updates/2.6.0.0/ambari.repo -o /etc/yum.repos.d/ambari.repo
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 yum -y install glibc-common ntpdate
@@ -23,3 +25,6 @@ chmod u+x /vagrant/jdk1.7.0_80/bin/*
 chmod u+x /vagrant/jdk1.7.0_80/jre/bin/*
 
 source /etc/profile
+
+
+# curl http://mirrors.163.com/.help/CentOS7-Base-163.repo -o /etc/yum.repos.d/CentOS7-Base-163.repo
