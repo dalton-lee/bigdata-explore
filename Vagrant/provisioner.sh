@@ -4,12 +4,17 @@
 timedatectl set-timezone Asia/Shanghai
 systemctl restart network
 
+curl -s http://ThinkPad-P50/hosts|cat > /etc/hosts
+vmip=ip a |grep 172.30|awk -F'/' '{print $1}'|awk '{print $2}'
+echo "$vmip    $(hostname)" >> /etc/hosts
+curl http://thinkpad-p50 --upload-file /etc/hosts
+
 sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
 sed -i 's/plugins=1/plugins=0/' /etc/yum.conf
 
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-curl http://ThinkPad-P50/centos/CentOS7-Base-163-mod.repo -o /etc/yum.repos.d/CentOS7-Base-163-mod.repo
-curl http://ThinkPad-P50/ambari/centos7/2.x/updates/2.6.0.0/ambari.repo -o /etc/yum.repos.d/ambari.repo
+curl -s http://ThinkPad-P50/centos/CentOS7-Base-163-mod.repo -o /etc/yum.repos.d/CentOS7-Base-163-mod.repo
+curl -s http://ThinkPad-P50/ambari/centos7/2.x/updates/2.6.0.0/ambari.repo -o /etc/yum.repos.d/ambari.repo
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 yum -y install glibc-common ntpdate
 localedef --list-archive | egrep -v -i "zh_CN|en_US" | xargs localedef --delete-from-archive
